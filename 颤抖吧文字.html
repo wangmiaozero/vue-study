@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vuev2.5.21.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{msg}}</p>
+        <button @click="mover">颤抖吧</button>
+        <button @click="stop">stop</button>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                msg:"hello wrold 你好 世界",
+                setI:null,
+            },
+            methods:{
+                mover(){
+                    if(this.setI) return
+                   this.setI= setInterval(() => {
+                       var num= this.msg.substring(0,1)
+                       var num1 =  this.msg.substring(1)
+                     this.msg=num1+num
+                    }, 400);
+                },
+                stop(){
+                     clearInterval(this.setI)
+                     this.setI=""
+                }
+            }
+        })
+    </script>
+</body>
+</html>

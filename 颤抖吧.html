@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vuev2.5.21.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>{{str}}</h2>
+        <button @click='start'>颤抖吧</button>
+        <button @click='start'>毁灭吧</button>
+        <button @click='moving'>动起来</button>
+        <button @click='stop'>停下来</button>
+    </div>
+    <script>
+        let vm= new Vue({
+            el:"#app",
+            data:{
+                str:"组件可以扩展HTML元素，封装可重用的HTML代码，我们可以将组件看作自定义的HTML元素",
+                setIn:""
+            },
+            methods:{
+                start(){
+                    var start =vm.$data.str.substring(0,1);
+                    var end =vm.$data.str.substring(0);
+                    vm.str=end+start;
+                },
+                moving(){
+                //     var This=this
+                //   var setInterval= setInterval(function(){
+                //         var start=This.str.substring(0,1)
+                //         var end =This.str.substring(1)
+                //         This.str=end +start;
+                //     },500)
+                    if(this.setIn) return
+                   this.setIn= setInterval(()=>{
+                        var start=this.str.substring(0,1)
+                        var end =this.str.substring(0)
+                        this.str=end +start;
+                    },500)
+                },
+                stop(){
+                    clearInterval(this.setIn)
+                    this.setIn=""
+                }
+
+            }
+        })
+    </script>
+</body>
+</html>
