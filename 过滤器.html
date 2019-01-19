@@ -9,10 +9,10 @@
 </head>
 <body>
   <div id="app">
-    <p>{{msg | msgFormat}}</p>
+    <p>{{msg | msgFormat('你好')}}</p>
   </div>
   <script>
-    Vue.filter('msgFormat',(msg)=> msg.replace("hello","你好"))
+    Vue.filter('msgFormat',(msg,arg)=> msg.replace(/hello/g,arg))
     new Vue({
       el:"#app",
       data:{
