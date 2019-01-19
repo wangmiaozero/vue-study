@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vuev2.5.21.js"></script>
+    <style>
+        #app{
+            border:1px solid red;
+            width: 500px;
+            height: 500px;
+        }
+        .box{
+            width: 250px;
+            height: 250px;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <!-- 阻止事件冒泡 -->
+    <!-- <div id="app">
+        <div class="box" @click="boxbtn">
+                <button @click.stop="btn">按钮</button>
+        </div>
+    </div> -->
+    <!-- 阻止默认行为 -->
+    <!-- <div id="app">
+            <div class="box" @click="boxbtn">
+                    <a @click.prevent="btn" href="http://www.baidu.com">按钮</a>
+            </div>
+        </div> -->
+        <div id="app">
+                <div class="box" @click="boxbtn">
+                        <a @click.prevent.once="btn" href="http://www.baidu.com">按钮</a>
+                </div>
+            </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                msg:"啦啦啦啦啦"
+            },
+            methods:{
+                btn(){
+                  console.log("按钮被点击了")  
+                },
+                boxbtn(){
+                  console.log("这是被点击的box")  
+                }
+            }
+        })
+    </script>
+</body>
+</html>
