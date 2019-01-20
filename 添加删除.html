@@ -7,7 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="./bootstrap.css">
     <script src="./moment.js"></script>
-    <script src="./vuev2.5.21.js"></script>
+		<script src="./vuev2.5.21.js"></script>
 </head>
 <body>
     <div id="app">
@@ -18,16 +18,16 @@
               <div class="panel-body form-inline">
                     <label >
                         id:
-                        <input type="text" name="id"  class="form-control" v-model="id">
+                        <input type="text" name="id"  class="form-control" v-model="id" v-color="'pink'">
                     </label>
                     <label >
                         Name:
-                        <input type="text" name="name" id="id" class="form-control"  v-model="name" @keyup.enter="add">
+                        <input type="text" name="name" id="id" class="form-control"  v-model="name" @keyup.enter="add" v-color="'red'">
                     </label>  
                     <input type="button" value="添加" class="btn btn-primay" @click="add()">  
                     <label >
                         搜索名称关键字:
-                        <input type="text"  class="form-control" v-model="keywords" autofocus>
+                        <input type="text"  class="form-control" v-model="keywords" autofocus v-color="'green'">
                     </label>      
               </div>
         </div>
@@ -53,6 +53,12 @@
         </table> 
     </div>
     <script>
+				//全局自定属性
+				Vue.directive('color',{
+					bind:(el,binding)=>{
+						el.style.color=binding.value
+					}
+				})
         new Vue({
             el:"#app",
             data:{
@@ -83,12 +89,21 @@
                 }
             },
             filters:{
-							msgFormat:(datetimesss)=>{
-								// var a=new Date(datetimesss);
-							return	moment(datetimesss).format('YYYY MM DD, HH:mm:ss a');
-							}
-            }
-        })
+                msgFormat:(datetimesss)=>{
+                    // var a=new Date(datetimesss);
+                return	moment(datetimesss).format('YYYY-MM-DD  HH:mm:ss a');
+                }
+						},
+						//私有自定属性
+						// directives:{
+						// 	'color':{
+						// 		bind:(el,binding)=>{
+						// 			el.style.color=binding.value
+						// 		}
+						// 	}
+						// }
+				})
+			
     </script>
 </body>
 </html>
