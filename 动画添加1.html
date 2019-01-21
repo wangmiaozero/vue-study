@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./vuev2.5.21.js"></script>
+</head>
+<body>
+	<div id="app">
+		<label>
+			<input type="text" placeholder="请输入name" v-model="name" @keyup.enter="add">
+		</label>
+		<transition-group tag="ul">
+			<li v-for="(item,index) in list" :key="item.id" @click="del(item.id)">
+				{{item.id}}
+				{{item.name}}
+			</li>
+		</transition-group>
+	</div>
+	<script>
+		new Vue({
+			el:"#app",
+			data:{
+				id:"",
+				name:"",
+				list:[{id:0,name:"hello wrold"}]
+			},
+			methods:{
+				add(){
+					this.list.push({id:++this.id,name:this.name})
+				},
+				del(id){
+					this.list.splice(this.list.findIndex(item => this.id == id),1)
+				}
+			}
+		})
+	</script>
+</body>
+</html>

@@ -57,7 +57,8 @@
 		new Vue({
 			el:"#app",
 			data:{
-				name:"新年快乐",
+				//name:"新年快乐",
+				name:"",
 				keywords:"",
 				list:[
 					// {id:1,name:'宝马',ctime: new Date()},
@@ -85,16 +86,16 @@
 						//console.log(res)
 						if(res.body.status === 0){
 							this.Getlistssss();
-							//this.name=""
+							this.name=""
 						}
-						//this.add();
+					
 					})			
 				},
 				//删除
 				del(id){
 					this.$http.get('api/delproduct/'+ id).then(res =>{
 						this.Getlistssss();
-					  //this.del(++id)
+						this.del(++id)
 					console.log(++id);
 					});
 					
