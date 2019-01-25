@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vuev2.5.21.js"></script>
+    <script src="./lib/vue-router-3.0.1.js"></script>
+    <style>
+        .router-link-active{
+            color: red;
+            background-color: hotpink;
+            width: 200px;
+            height: 200px;
+            font-size: 18px;
+            border-radius: 10px;
+        }
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+            transform: translateX(140px)
+        }
+        .v-enter-active,
+        .v-leave-active{
+            transition: all 0.8s ease-out;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <router-link to="/login">登录</router-link>
+        <router-link to="/register">注册</router-link>
+       <transition mode="out-in">
+            <router-view ></router-view>
+       </transition>
+            
+        
+    </div>
+    <script>
+        //组件模板对象
+        var login = {
+            template:'<h1>登录组件</h1>'
+        }
+        var register = {
+                template:'<h1>注册组件</h1>'
+        }
+        //注册路由组件
+        let router = new VueRouter({
+            routes:[
+                {path:'/',redirect:'/login'},
+                {path:'/login',component:login},
+                {path:'/register',component:register}
+            ]
+        })
+        new Vue({
+            el:"#app",
+            data:{},
+            methods:{},
+            router
+
+        })
+    </script>
+</body>
+</html>

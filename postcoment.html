@@ -7,14 +7,12 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Document</title>
 	<link rel="stylesheet" href="./bootstrap.css">
-	<!-- <script src="./vuev2.5.21.js"></script> -->
 	<script src="./vue-2.4.0.js"></script>
 </head>
 
 <body>
 	<div id="app">
-		<comment></comment>
-		<!-- <commentbox></commentbox> -->
+		<cmt-box @post-comment="loadComments"></cmt-box>
 		<ul class="list-group">
 			<li class="list-group-item" v-for="item in list" :key="item.id">
 				<span class="badge">评论人:{{item.name}}</span>
@@ -22,6 +20,7 @@
 			</li>
 		</ul>
 	</div>
+
 	<template id="tmpl">
 		<div>
 			<div class="form-group">
@@ -31,17 +30,16 @@
 			</div>
 			<div class="form-group">
 				<label>评论内容:</label>
-					<textarea class="form-control" v-model="content"></textarea>
+					<textarea class="form-control" v-model="content" @keyup.enter.prevent="postComment"></textarea>
 			</div>
 			<div class="form-group">
-			
-					<input type="button" class="btn btn-primary" @click="postComment" value="发表评论"/>
+					<input type="button"  value="发表评论"  class="btn btn-primary" @click="postComment"/>
 			</div>
 		</div>
 	</template>
 	<script>
 		//组件
-		var comment = {
+		var commentBox = {
 			data() {
 				return {
 					name: "",
@@ -51,7 +49,12 @@
 			template: "#tmpl",
 			methods: {
 				postComment() {
-					
+					var comment ={id:Date.now(),name:this.name,content:this.content}
+					var list = JSON.parse(localStorage.getItem('cmts') || '[]')
+          			list.unshift(comment)
+					localStorage.setItem('cmts',JSON.stringify(list))
+					this.name = this.content =''
+					this.$emit('post-comment')
 				}
 			}
 		}
@@ -76,15 +79,17 @@
 					},
 				]
 			},
-			mathods: {
-				loadcomments() {
+			created () {
+				this.loadComments()	
+			},
+			methods: {
+				loadComments(){// 从本地的 localStorage 中，加载评论列表
 					this.list = JSON.parse(localStorage.getItem('cmts') || '[]')
 				}
 			},
 			components: {
-				//注册组件
-				comment
-				//'commentbox': comment
+				//注册组件	
+				'cmt-box': commentBox
 			}
 		})
 	</script>

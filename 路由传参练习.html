@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue-2.4.0.js"></script>
+    <script src="./lib/vue-router-3.0.1.js"></script>
+    <style>
+        .new-list-container 
+        .new-list-ul{
+            list-style: none;
+            padding: 0;
+        }
+        .new-list-container 
+        .new-list-ul li{
+            border: 1px dashed hotpink;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <router-view></router-view>
+    </div>
+
+    <template id="new-list">
+        <div class="new-list-container">
+            <h1>我是列表页面</h1>
+            <ul class="new-list-ul">
+                <router-link
+                tag="li" 
+                v-for="(item, index) in newsList" 
+                :key="item.id"
+                :to="'/newsInfo?id=' + item.id">
+                    <p>id:{{item.id}}</p>
+                    <p>标题:{{item.title}}</p>
+                    <p>内容简介:{{item.container}}</p>
+                </router-link>
+            </ul>
+        </div>
+        <!-- :to="'/newsInfo/' + item.id" -->
+    </template>
+    <template id="new-info">
+        <div>
+            <h1>这是详情页:{{$route.query.id}}----{{$route.params.id}}</h1>
+        </div>
+    </template>
+    <script>
+        //列表组件
+        let newListComponents = {
+            template:'#new-list',
+            data () {
+                return {
+                    newsList:[
+                        {id:1,title:'腾讯爸爸!震惊居然这样做出种事',container:"腾讯爸爸!震惊居然这样做出种事,无法让人接受!!!!!"},
+                        {id:2,title:'腾讯爸爸!震惊居然这样做出种事',container:"腾讯爸爸!震惊居然这样做出种事,无法让人接受!!!!!"},
+                        {id:3,title:'腾讯爸爸!震惊居然这样做出种事',container:"腾讯爸爸!震惊居然这样做出种事,无法让人接受!!!!!"},
+                        {id:4,title:'腾讯爸爸!震惊居然这样做出种事',container:"腾讯爸爸!震惊居然这样做出种事,无法让人接受!!!!!"},
+                    ]
+                }
+            }
+        }
+        let newInfoComponents = {
+            template:'#new-info',
+            created () {     
+               console.log(this.$route);
+            }
+        }
+
+        //new路由
+       let router = new VueRouter({
+            routes:[
+                //重新定向
+                {path:'/',redirect:'/newsList'},
+                {path:'/newsList',component:newListComponents},
+                {path:'/newsInfo',component:newInfoComponents}
+                //使用params 传参
+                //{path:'/newsInfo/:id',component:newInfoComponents}
+            ]  
+        })
+        new Vue({
+            el:"#app",
+            data:{},
+            methods:{},
+            //'router':router
+           router
+        })
+    </script>
+</body>
+</html>
