@@ -1,0 +1,10 @@
+ul{
+    list-style: none;
+    width: 400px;
+    margin: 200px auto;
+    border: 5px solid hotpink;
+}
+li{
+    width: 100%;
+    height: 100%;
+}
