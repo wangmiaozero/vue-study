@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vuev2.5.21.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div v-model="result.obj" >{{result.obj}}</div>
+        <span v-text="str"></span>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                result:{obj:"hello wrold"},
+                str:"你好 世界"
+            },
+            created(){
+            
+            },
+            methods:{
+               
+            }
+        })    
+    </script>
+</body>
+</html>
