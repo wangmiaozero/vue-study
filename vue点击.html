@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vuev2.5.21.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div >{{obj}}</div>
+        <span @click="obj.c=30">按钮</span>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                obj:{
+                    a:10,
+                    b:20,
+                   // c:null,//如果定义了,就可以实现. 没有定义也不会报错
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -22,7 +22,7 @@ module.exports = {
         // 如果不传入任何配置选项, 默认也会创建一个index.html托管在服务器根路径
         // 只不过这个HTML是空的, title默认是webpack app
         new HtmlWebpackPlugin({
-          // title: '传智大法好!!!', // 如果模板中有title, 会覆盖这里的配置
+          // title: 'title大法好!!!', // 如果模板中有title, 会覆盖这里的配置
           template: './src/index.html'
         })
       ],

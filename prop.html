@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul >
+            <todo-item v-for="(item,index) in arr"  v-bind:todo="item" v-bind:index="index"></todo-item>
+        </ul>
+    </div>
+    <script>
+           Vue.component("todo-item",{
+            props:['todo','index'],
+            template:"<li>{{index}}:{{todo.text}}</li>"	
+        })
+        var app = new Vue({
+             el:"#app",
+            data:{
+            arr: [ { text: '学习 JavaScript' }, { text: '学习 Vue' }, { text: '整个牛项目' } ]
+            }
+        })
+    </script>
+</body>
+</html>
