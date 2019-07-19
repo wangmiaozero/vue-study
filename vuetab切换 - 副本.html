@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<link rel="stylesheet" href="./bootstrap.css">
+	<script src="./vuev2.5.21.js"></script>
+	<style>
+		
+	</style>
+</head>
+
+<div id="app">
+  <!-- 推荐这种写法-->
+  <ul class="tab-tit">
+      <li v-for="(title,index) in tabTitle" @click="cur=index" :class="{active:cur==index}">{{title}}</li>
+  </ul>
+  <div class="tab-content">
+      <div v-for="(m,index) in tabMain" v-show="cur==index">{{m}}</div>
+  </div>
+</div>
+  <script type="text/javascript">
+      window.onload = function(){
+         var app = new Vue({
+          el:'#app',
+          data:{
+              tabTitle: ['标题一', '标题二', '标题三', '标题四'],
+              tabMain: ['内容一', '内容二', '内容三', '内容四'],
+              cur: 0 //默认选中第一个tab
+          }
+      })
+  }
+  </script>
+
+</html>

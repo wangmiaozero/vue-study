@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<link rel="stylesheet" href="./bootstrap.css">
+	<script src="./vuev2.5.21.js"></script>
+	<style>
+		
+	</style>
+</head>
+
+<body>
+  <div id="app">
+      <ul class="tab-tilte">
+          <li @click="cur=0" :class="{active:cur==0}">标题一</li>
+          <li @click="cur=1" :class="{active:cur==1}">标题二</li>
+          <li @click="cur=2" :class="{active:cur==2}">标题三</li>
+          <li @click="cur=3" :class="{active:cur==3}">标题四</li>
+      </ul>
+      <div class="tab-content">
+          <div v-show="cur==0">内容一</div>
+          <div v-show="cur==1">内容二</div>
+          <div v-show="cur==2">内容三</div>
+          <div v-show="cur==3">内容四</div>
+      </div>
+  </div>
+  <script src="./js/vue.js" type="text/javascript"></script>
+  <script type="text/javascript">
+      var app = new Vue({
+
+          el: "#app",
+          data: {
+
+              cur:0 //默认选中第一个tab
+
+          }
+      });    
+  </script>
+</body
+
+</html>
