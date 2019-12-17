@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./vuev2.5.21.js"></script>
+  <style>
+    html {
+      background: #fff;
+      width: 100%;
+      height: auto;
+      z-index: 1;
+    }
+
+    [v-cloak] {
+      display: none;
+    }
+
+    body {
+      min-height: 0;
+    }
+
+    .order-tip {
+      text-align: center;
+    }
+
+    .img {
+      margin-top: 1.6rem;
+      margin-bottom: 0.453333rem;
+    }
+
+    .img img {
+     /*  width: 2.133333rem;
+      height: 2.133333rem; */
+      margin-top: 1.2rem;
+    }
+
+    h3 {
+      font-size: 1.066667rem;
+      color: #1A191E;
+      margin-bottom: 0.426667rem;
+      line-height: 1.493333rem;
+    }
+
+    .tip {
+      font-size: 0.693333rem;
+      color: #BCBCBC;
+      line-height: 1rem;
+    }
+
+    .select-options {
+      margin: 2rem auto;
+      text-align: center
+    }
+
+    .select-options li {
+      margin-bottom: 1.386667rem;
+    }
+
+    .select-options label {
+      display: inline-block;
+      width: 3.573333rem;
+      line-height: 1.6rem;
+      font-size: 0.853333rem;
+      color: #1A191E;
+      margin-right: 1.2rem
+    }
+
+    .select-options li:nth-of-type(4) span,
+    .select-options li:nth-of-type(5) span {
+      width: 100%;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+    }
+
+    .select-options select {
+      appearance: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      padding-right: 1.1rem;
+      background: url("${basePath}/images/3C/3c_select.png") no-repeat right center;
+      -webkit-background-size: 0.666667rem 0.32rem;
+      background-size: 0.666667rem 0.32rem;
+      background-position: 97% 55%;
+    }
+
+    .select-options select,
+    .select-options input {
+      width: 10.613333rem;
+      height: 1.6rem;
+      line-height: 1.6rem;
+      padding-left: 0.533333rem;
+      background-color: #fff;
+      border: 1px solid #DDD;
+      border-radius: 0.133333rem;
+      font-size: 0.64rem;
+    }
+
+    .select-options li:last-of-type {
+      position: relative;
+    }
+
+    .select-options li:last-of-type img {
+      position: absolute;
+      /* width: 1.2rem;
+      height: 1.066667rem; */
+      top: 0.55rem;
+      right: .4rem;
+      padding: .3rem;
+    }
+
+    .select-options li:last-of-type label {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      background-size: 0.746667rem 0.746667rem;
+    }
+
+    .btn {
+      width: 18.4rem;
+      height: 2.4rem;
+      line-height: 2.4rem;
+      background: #FF3B30;
+      border-radius: 0.053333rem;
+      color: #fff;
+      font-size: 0.853333rem;
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    /*IMEI mask*/
+    .imei,
+    .camera {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      z-index: 2;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, .7);
+      text-align: center;
+    }
+
+    .imer-inner {
+      width: 13.28rem;
+      background: #fff;
+      border-radius: 0.213333rem;
+    }
+
+    .camera-inner {
+      width: 16.96rem;
+      background: #fff;
+      border-radius: 0.213333rem;
+    }
+
+    .imer-inner h2 {
+      font-size: 0.906667rem;
+      line-height: 1.28rem;
+      color: #1C1717;
+      margin: 0.906667rem 0 0.8rem 0;
+    }
+
+    .imer-inner p {
+      text-align: left;
+      padding: 0 1.04rem;
+      margin-bottom: 0.8rem;
+      font-size: 0.693333rem;
+      color: #999;
+    }
+
+    .imer-inner .sure-btn {
+      height: 2.533333rem;
+      line-height: 2.533333rem;
+      border-top: 1px solid #CCC;
+      font-size: 0.746667rem;
+      color: #1C1717;
+    }
+
+    /*camera-inner mask*/
+    .camera-inner p {
+      text-align: center;
+      line-height: 5.333333rem;
+      height: 5.333333rem;
+      font-size: 0.906667rem;
+      color: #4A4A4A;
+      border-bottom: 1px solid #EEE;
+    }
+
+    .camera-inner div {
+      height: 2.56rem;
+      line-height: 2.56rem;
+      text-align: center;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+    }
+
+    .camera-inner span {
+      -webkit-box-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      font-size: 0.906667rem;
+      color: #1A191E;
+    }
+
+    .camera-inner span:nth-of-type(1) {
+      border-right: 1px solid #EEE;
+      color: #5E5E5E;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app" v-cloak>
+    <div class="order-tip">
+      <div class="img">
+        <img src="http://oss.wangmiaozero.cn/wechat/H8xkeipgUqMVPGZ.gif" alt="">
+      </div>
+      <h3>分期成功</h3>
+      <div class="tip">完善订单信息，就可以提货啦~</div>
+    </div>
+
+    <ul class="select-options">
+      <li>
+        <label>选择品牌</label>
+        <select v-model='brand' @change="type=null,name=null,ram=null, color=null, imei=null">
+          <option disabled="disabled" :value="null">请选择</option>
+          <option v-for='(item, index) in product' :value="index">{{item.brand}}</option>
+        </select>
+      </li>
+      <li>
+        <label>产品类型</label>
+        <select v-model='type' @change="name=null,ram=null, color=null, imei=null">
+          <option disabled="disabled" :value="null">请选择</option>
+          <option v-for='(item, index) in typeArray' :value="index">{{item.type}}</option>
+        </select>
+      </li>
+      <li>
+        <label>产品名称</label>
+        <select v-model='name' @change="ram=null, color=null, imei=null">
+          <option disabled="disabled" :value="null">请选择</option>
+          <option v-for='(item, index) in nameArray' :value="index">{{item.name}}</option>
+        </select>
+      </li>
+      <li>
+        <label><span><i>内</i><i>存</i></span></label>
+        <select v-model='ram' @change="color=null, imei=null">
+          <option disabled="disabled" :value="null">请选择</option>
+          <option v-for='(item, index) in ramArray' :value="index">{{item.ram}}</option>
+        </select>
+      </li>
+      <li>
+        <label><span><i>颜</i><i>色</i></span></label>
+        <select v-model='color' @change="imei=null">
+          <option disabled="disabled" :value="null">请选择</option>
+          <option v-for='(item, index) in colorArray' :value="index">{{item}}</option>
+        </select>
+      </li>
+      <li v-show="imeiShow">
+        <label @click="showImeiTip">IMEI码</label>
+        <input type="text" v-model="imei">
+
+      </li>
+    </ul>
+
+    <div class="btn" @click="submit()">提交信息</div>
+
+    <!--IMEI mask-->
+    <div class="imei" v-show="imeiMaskShow">
+      <div class="imer-inner">
+        <h2>什么是IMEI码？</h2>
+        <p>IMEI码是手机的列号，在购买苹果手机时，苹果公司需要验证每部手机的IMEI码。</p>
+        <p>IMEI码可在手机外包装盒上查看，您可以通过输入数字，或拍照识别条形码的方式输入IMEI码。</p>
+        <div class="sure-btn" @click="closeImeiTip">知道了</div>
+      </div>
+    </div>
+
+    <!--camera mask-->
+    <div class="camera" v-show="cameraShow">
+      <div class="camera-inner">
+        <p>是否允许使用相机？</p>
+        <div>
+          <span @click="cancleCamera">取消</span>
+          <span>同意</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+  var app = new Vue({
+        el: '#app',
+        data: {
+            imei: '',
+            imeiMaskShow: false,
+            cameraShow: false,
+            brand: null,
+            type: null,
+            name: null,
+            ram: null,
+            color: null,
+            error: null,
+            submitFlag: true,
+            product: [
+                {
+                    "brand": "Apple",
+                    "type": [
+                        {
+                            "type": "iPhone",
+                            "name": [
+                                {
+                                    "name": "iPhone XS",
+                                    "ram": [
+                                        {
+                                            "ram": "64G",
+                                            "name": "iPhone XS",
+                                            "color": [
+                                                "金色",
+                                                "银色",
+                                                "深空灰"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "256G",
+                                            "name": "iPhone XS",
+                                            "color": [
+                                                "金色",
+                                                "银色",
+                                                "深空灰"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "512G",
+                                            "name": "iPhone XS",
+                                            "color": [
+                                                "金色",
+                                                "银色",
+                                                "深空灰"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "iPhone XS MAX",
+                                    "ram": [
+                                        {
+                                            "ram": "512G",
+                                            "name": "iPhone XS MAX",
+                                            "color": [
+                                                "金色",
+                                                "银色",
+                                                "深空灰"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "iPhone XR",
+                                    "ram": [
+                                        {
+                                            "ram": "512G",
+                                            "name": "iPhone XR",
+                                            "color": [
+                                                "红色特别版",
+                                                "黄色",
+                                                "白色",
+                                                "珊瑚色",
+                                                "黑色",
+                                                "蓝色"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "128G",
+                                            "name": "iPhone XR",
+                                            "color": [
+                                                "红色特别版",
+                                                "黄色",
+                                                "白色",
+                                                "珊瑚色",
+                                                "黑色",
+                                                "蓝色"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "256G",
+                                            "name": "iPhone XR",
+                                            "color": [
+                                                "红色特别版",
+                                                "黄色",
+                                                "白色",
+                                                "珊瑚色",
+                                                "黑色",
+                                                "蓝色"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "iPhone X",
+                                    "ram": [
+                                        {
+                                            "ram": "64G",
+                                            "name": "iPhone X",
+                                            "color": [
+                                                "银色",
+                                                "深空灰"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "256G",
+                                            "name": "iPhone X",
+                                            "color": [
+                                                "银色",
+                                                "深空灰"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "iPhone 8 Plus",
+                                    "ram": [
+                                        {
+                                            "ram": "64G",
+                                            "name": "iPhone 8 Plus",
+                                            "color": [
+                                                "银色",
+                                                "深空灰",
+                                                "金色",
+                                                "红色"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "256G",
+                                            "name": "iPhone 8 Plus",
+                                            "color": [
+                                                "银色",
+                                                "深空灰",
+                                                "金色",
+                                                "红色"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "iPhone 8",
+                                    "ram": [
+                                        {
+                                            "ram": "64G",
+                                            "name": "iPhone 8",
+                                            "color": [
+                                                "金色",
+                                                "银色",
+                                                "深空灰"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "256G",
+                                            "name": "iPhone 8",
+                                            "color": [
+                                                "金色",
+                                                "银色",
+                                                "深空灰",
+                                                "红色"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "128G",
+                                            "name": "iPhone 8",
+                                            "color": [
+                                                "亮黑色"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "iPhone 7 Plus",
+                                    "ram": [
+                                        {
+                                            "ram": "32G",
+                                            "name": "iPhone 7 Plus",
+                                            "color": [
+                                                "黑色",
+                                                "银色",
+                                                "金色",
+                                                "玫瑰金"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "128G",
+                                            "name": "iPhone 7 Plus",
+                                            "color": [
+                                                "黑色",
+                                                "银色",
+                                                "金色",
+                                                "玫瑰金",
+                                                "亮黑色",
+                                                "红色特别版"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "iPhone 7",
+                                    "ram": [
+                                        {
+                                            "ram": "32G",
+                                            "name": "iPhone 7",
+                                            "color": [
+                                                "黑色",
+                                                "银色",
+                                                "金色",
+                                                "玫瑰金"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "128G",
+                                            "name": "iPhone 7",
+                                            "color": [
+                                                "黑色",
+                                                "银色",
+                                                "金色",
+                                                "玫瑰金"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "iPhone 6S Plus",
+                                    "ram": [
+                                        {
+                                            "ram": "32G",
+                                            "name": "iPhone 6S Plus",
+                                            "color": [
+                                                "深空灰",
+                                                "银色",
+                                                "金色",
+                                                "玫瑰金"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "128G",
+                                            "name": "iPhone 6S Plus",
+                                            "color": [
+                                                "深空灰",
+                                                "银色",
+                                                "金色",
+                                                "玫瑰金"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "iPhone 6S ",
+                                    "ram": [
+                                        {
+                                            "ram": "32G",
+                                            "name": "iPhone 6S ",
+                                            "color": [
+                                                "深空灰",
+                                                "银色",
+                                                "金色",
+                                                "玫瑰金"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "128G",
+                                            "name": "iPhone 6S ",
+                                            "color": [
+                                                "深空灰",
+                                                "银色",
+                                                "金色",
+                                                "玫瑰金"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "iPad",
+                            "name": [
+                                {
+                                    "name": "IPad Air 无线局域网机型",
+                                    "ram": [
+                                        {
+                                            "ram": "64G",
+                                            "name": "IPad Air 无线局域网机型",
+                                            "color": [
+                                                "银色",
+                                                "金色",
+                                                "深空灰"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "256G",
+                                            "name": "IPad Air 无线局域网机型",
+                                            "color": [
+                                                "银色",
+                                                "金色",
+                                                "深空灰"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Ipad Air 无线局域网 + 蜂窝网络机型",
+                                    "ram": [
+                                        {
+                                            "ram": "64G",
+                                            "name": "Ipad Air 无线局域网 + 蜂窝网络机型",
+                                            "color": [
+                                                "银色",
+                                                "金色",
+                                                "深空灰"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "256G",
+                                            "name": "Ipad Air 无线局域网 + 蜂窝网络机型",
+                                            "color": [
+                                                "银色",
+                                                "金色",
+                                                "深空灰"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "12.9英寸Ipad Pro 无线局域网机型",
+                                    "ram": [
+                                        {
+                                            "ram": "64G",
+                                            "name": "12.9英寸Ipad Pro 无线局域网机型",
+                                            "color": [
+                                                "深空灰",
+                                                "银色"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "256G",
+                                            "name": "12.9英寸Ipad Pro 无线局域网机型",
+                                            "color": [
+                                                "深空灰",
+                                                "银色"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "512G",
+                                            "name": "12.9英寸Ipad Pro 无线局域网机型",
+                                            "color": [
+                                                "深空灰",
+                                                "银色"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "1T",
+                                            "name": "12.9英寸Ipad Pro 无线局域网机型",
+                                            "color": [
+                                                "深空灰",
+                                                "银色"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "12.9英寸Ipad Pro 无线局域网 + 蜂窝网络机型",
+                                    "ram": [
+                                        {
+                                            "ram": "64G",
+                                            "name": "12.9英寸Ipad Pro 无线局域网 + 蜂窝网络机型",
+                                            "color": [
+                                                "深空灰",
+                                                "银色"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "256G",
+                                            "name": "12.9英寸Ipad Pro 无线局域网 + 蜂窝网络机型",
+                                            "color": [
+                                                "深空灰",
+                                                "银色"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "512G",
+                                            "name": "12.9英寸Ipad Pro 无线局域网 + 蜂窝网络机型",
+                                            "color": [
+                                                "深空灰",
+                                                "银色"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "1T",
+                                            "name": "12.9英寸Ipad Pro 无线局域网 + 蜂窝网络机型",
+                                            "color": [
+                                                "深空灰",
+                                                "银色"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "11英寸Ipad Pro 无线局域网机型",
+                                    "ram": [
+                                        {
+                                            "ram": "64G",
+                                            "name": "11英寸Ipad Pro 无线局域网机型",
+                                            "color": [
+                                                "深空灰",
+                                                "银色"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "256G",
+                                            "name": "11英寸Ipad Pro 无线局域网机型",
+                                            "color": [
+                                                "深空灰",
+                                                "银色"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "512G",
+                                            "name": "11英寸Ipad Pro 无线局域网机型",
+                                            "color": [
+                                                "深空灰",
+                                                "银色"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "1T",
+                                            "name": "11英寸Ipad Pro 无线局域网机型",
+                                            "color": [
+                                                "深空灰",
+                                                "银色"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "11英寸Ipad Pro 无线局域网 + 蜂窝网络机型",
+                                    "ram": [
+                                        {
+                                            "ram": "64G",
+                                            "name": "11英寸Ipad Pro 无线局域网 + 蜂窝网络机型",
+                                            "color": [
+                                                "深空灰",
+                                                "银色"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "256G",
+                                            "name": "11英寸Ipad Pro 无线局域网 + 蜂窝网络机型",
+                                            "color": [
+                                                "深空灰",
+                                                "银色"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "512G",
+                                            "name": "11英寸Ipad Pro 无线局域网 + 蜂窝网络机型",
+                                            "color": [
+                                                "深空灰",
+                                                "银色"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "1T",
+                                            "name": "11英寸Ipad Pro 无线局域网 + 蜂窝网络机型",
+                                            "color": [
+                                                "深空灰",
+                                                "银色"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Ipad 无线局域网机型",
+                                    "ram": [
+                                        {
+                                            "ram": "32G",
+                                            "name": "Ipad 无线局域网机型",
+                                            "color": [
+                                                "银色",
+                                                "金色",
+                                                "深空灰"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "128G",
+                                            "name": "Ipad 无线局域网机型",
+                                            "color": [
+                                                "银色",
+                                                "金色",
+                                                "深空灰"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Ipad 无线局域网 + 蜂窝网络机型",
+                                    "ram": [
+                                        {
+                                            "ram": "32G",
+                                            "name": "Ipad 无线局域网 + 蜂窝网络机型",
+                                            "color": [
+                                                "银色",
+                                                "金色",
+                                                "深空灰"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "128G",
+                                            "name": "Ipad 无线局域网 + 蜂窝网络机型",
+                                            "color": [
+                                                "银色",
+                                                "金色",
+                                                "深空灰"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Ipad mini 无线局域网机型",
+                                    "ram": [
+                                        {
+                                            "ram": "64G",
+                                            "name": "Ipad mini 无线局域网机型",
+                                            "color": [
+                                                "银色",
+                                                "金色",
+                                                "深空灰"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "256G",
+                                            "name": "Ipad mini 无线局域网机型",
+                                            "color": [
+                                                "银色",
+                                                "金色",
+                                                "深空灰"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Ipad mini 无线局域网 + 蜂窝网络机型",
+                                    "ram": [
+                                        {
+                                            "ram": "64G",
+                                            "name": "Ipad mini 无线局域网 + 蜂窝网络机型",
+                                            "color": [
+                                                "银色",
+                                                "金色",
+                                                "深空灰"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "256G",
+                                            "name": "Ipad mini 无线局域网 + 蜂窝网络机型",
+                                            "color": [
+                                                "银色",
+                                                "金色",
+                                                "深空灰"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Ipad mini4 无线局域网机型",
+                                    "ram": [
+                                        {
+                                            "ram": "128G",
+                                            "name": "Ipad mini4 无线局域网机型",
+                                            "color": [
+                                                "银色",
+                                                "金色",
+                                                "深空灰"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Ipad mini4 无线局域网 + 蜂窝网络机型",
+                                    "ram": [
+                                        {
+                                            "ram": "128G",
+                                            "name": "Ipad mini4 无线局域网 + 蜂窝网络机型",
+                                            "color": [
+                                                "银色",
+                                                "金色",
+                                                "深空灰"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Apple Mac",
+                            "name": [
+                                {
+                                    "name": "Apple MacBook12英寸笔记本",
+                                    "ram": [
+                                        {
+                                            "ram": "双核m3 8G 256G",
+                                            "name": "Apple MacBook12英寸笔记本",
+                                            "color": [
+                                                "金",
+                                                "银",
+                                                "深空灰"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "双核i5 8G 512G",
+                                            "name": "Apple MacBook12英寸笔记本",
+                                            "color": [
+                                                "金",
+                                                "银",
+                                                "深空灰"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "i5 8G 256G",
+                                            "name": "Apple MacBook12英寸笔记本",
+                                            "color": [
+                                                "金",
+                                                "银",
+                                                "灰"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Apple MacBook Air 13.3英寸笔记本",
+                                    "ram": [
+                                        {
+                                            "ram": "2018新款八代i5 8G 128G",
+                                            "name": "Apple MacBook Air 13.3英寸笔记本",
+                                            "color": [
+                                                "金",
+                                                "银",
+                                                "灰"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "2018新款八代i5 8G 256G",
+                                            "name": "Apple MacBook Air 13.3英寸笔记本",
+                                            "color": [
+                                                "金",
+                                                "银",
+                                                "灰"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "2017款i5 8G 128G",
+                                            "name": "Apple MacBook Air 13.3英寸笔记本",
+                                            "color": [
+                                                "银"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "2017款i5 8G 256G",
+                                            "name": "Apple MacBook Air 13.3英寸笔记本",
+                                            "color": [
+                                                "银"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "2017款i7 8G 128G",
+                                            "name": "Apple MacBook Air 13.3英寸笔记本",
+                                            "color": [
+                                                "银"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "2017款i7 8G 256G",
+                                            "name": "Apple MacBook Air 13.3英寸笔记本",
+                                            "color": [
+                                                "银"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Apple MacBook Pro",
+                                    "ram": [
+                                        {
+                                            "ram": "i5 8G 128G 13.3英寸",
+                                            "name": "Apple MacBook Pro",
+                                            "color": [
+                                                "灰",
+                                                "银"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "i5 8G 256G 13.3英寸",
+                                            "name": "Apple MacBook Pro",
+                                            "color": [
+                                                "灰",
+                                                "银"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "六核八代i7 16G 256G 15.4英灰",
+                                            "name": "Apple MacBook Pro",
+                                            "color": [
+                                                "灰",
+                                                "银"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "六核八代i7 16G 512G 15.4英寸",
+                                            "name": "Apple MacBook Pro",
+                                            "color": [
+                                                "灰",
+                                                "银"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "四核八代 i5 8G 256G 13.3英寸",
+                                            "name": "Apple MacBook Pro",
+                                            "color": [
+                                                "灰",
+                                                "银"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "四核八代 i5 8G 512G 13.3英寸",
+                                            "name": "Apple MacBook Pro",
+                                            "color": [
+                                                "灰",
+                                                "银"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Apple iMac",
+                                    "ram": [
+                                        {
+                                            "ram": "21.5英寸八代i3 8G 1TB 4K屏",
+                                            "name": "Apple iMac",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "21.5英寸八代i5 8G 1TB 4K屏",
+                                            "name": "Apple iMac",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "27英寸八代i5 8G 1TB 570X 5K屏",
+                                            "name": "Apple iMac",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "27英寸八代i5 8G 1TB 575X 5K屏",
+                                            "name": "Apple iMac",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "27英寸九代i5 8G 2TB 580X 5K屏",
+                                            "name": "Apple iMac",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Apple iMac Pro",
+                                    "ram": [
+                                        {
+                                            "ram": "21.5 英寸 双核i5 8G 1TB",
+                                            "name": "Apple iMac Pro",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "21.5 英寸 四核i5 8G 1TB 4K屏",
+                                            "name": "Apple iMac Pro",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "21.5 英寸 四核i5 8G 1TBFD 4K屏",
+                                            "name": "Apple iMac Pro",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "27英寸 3.4GHz四核i5 8G 1TBFD",
+                                            "name": "Apple iMac Pro",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "27英寸 3.5GHz四核i5 8G 1TBFD",
+                                            "name": "Apple iMac Pro",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "27英寸 3.8GHz四核i5 8G 2TBFD",
+                                            "name": "Apple iMac Pro",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "27英寸 八核Xeon W 32G 1TB 5K屏",
+                                            "name": "Apple iMac Pro",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Apple Mac Mini",
+                                    "ram": [
+                                        {
+                                            "ram": "2018新款四核i3 8G 128GSSD",
+                                            "name": "Apple Mac Mini",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "2018新款六核i5 8G 256GSSD",
+                                            "name": "Apple Mac Mini",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Apple Watch",
+                            "name": [
+                                {
+                                    "name": "Apple Watch Series 4",
+                                    "ram": [
+                                        {
+                                            "ram": "Apple Watch Series 4 44毫米",
+                                            "name": "Apple Watch Series 4",
+                                            "color": [
+                                                "黑色",
+                                                "粉砂色",
+                                                "白色",
+                                                "海贝色回环式",
+                                                "黑色回环式",
+                                                "粉砂色回环式"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Apple Watch Series 3",
+                                    "ram": [
+                                        {
+                                            "ram": "3 GPS+蜂窝网络款",
+                                            "name": "Apple Watch Series 3",
+                                            "color": [
+                                                "银色表壳-云雾灰表带"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "GPS款 38毫米",
+                                            "name": "Apple Watch Series 3",
+                                            "color": [
+                                                "黑色",
+                                                "白色"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Apple iPod touch",
+                            "name": [
+                                {
+                                    "name": "Apple iPod touch",
+                                    "ram": [
+                                        {
+                                            "ram": "Apple iPod touch 32G",
+                                            "name": "Apple iPod touch",
+                                            "color": [
+                                                "金色",
+                                                "银色",
+                                                "深空灰",
+                                                "粉色"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "Apple iPod touch 128G",
+                                            "name": "Apple iPod touch",
+                                            "color": [
+                                                "金色",
+                                                "银色",
+                                                "深空灰",
+                                                "粉色"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Apple配件",
+                            "name": [
+                                {
+                                    "name": "Apple AirPods 配无线充电盒",
+                                    "ram": [
+                                        {
+                                            "ram": "【新款】H1芯片 无线充电",
+                                            "name": "Apple AirPods 配无线充电盒",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "AirPods的无线充电盒",
+                                    "ram": [
+                                        {
+                                            "ram": "【新款】H1芯片 无线充电",
+                                            "name": "AirPods的无线充电盒",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Apple HomePod 智能音响",
+                                    "ram": [
+                                        {
+                                            "ram": "【新款】H1芯片 无线充电",
+                                            "name": "Apple HomePod 智能音响",
+                                            "color": [
+                                                "白色",
+                                                "深空灰色"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Apple USB连接线(Lightning/闪电转)",
+                                    "ram": [
+                                        {
+                                            "ram": "1m",
+                                            "name": "Apple USB连接线(Lightning/闪电转)",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "2m",
+                                            "name": "Apple USB连接线(Lightning/闪电转)",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "0.5m",
+                                            "name": "Apple USB连接线(Lightning/闪电转)",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Apple EarPods耳机",
+                                    "ram": [
+                                        {
+                                            "ram": "Lightning闪电插头",
+                                            "name": "Apple EarPods耳机",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "3.5毫米插头",
+                                            "name": "Apple EarPods耳机",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Apple 5W USB 电源适配器",
+                                    "ram": [
+                                        {
+                                            "ram": "5W USB 电源适配器",
+                                            "name": "Apple 5W USB 电源适配器",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "12W USB 电源适配器",
+                                            "name": "Apple 5W USB 电源适配器",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "18W USB-C 电源适配器",
+                                            "name": "Apple 5W USB 电源适配器",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Apple Watch 磁力充电线",
+                                    "ram": [
+                                        {
+                                            "ram": "1m",
+                                            "name": "Apple Watch 磁力充电线",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "2m",
+                                            "name": "Apple Watch 磁力充电线",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Apple 3.5毫米耳机插孔转换头",
+                                    "ram": [
+                                        {
+                                            "ram": "Lightning/闪电转",
+                                            "name": "Apple 3.5毫米耳机插孔转换头",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Apple键鼠外设",
+                                    "ram": [
+                                        {
+                                            "ram": "无线鼠标",
+                                            "name": "Apple键鼠外设",
+                                            "color": [
+                                                "银色",
+                                                "深空灰"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "无线键盘",
+                                            "name": "Apple键鼠外设",
+                                            "color": [
+                                                "银色",
+                                                "深空灰"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "无线触控板",
+                                            "name": "Apple键鼠外设",
+                                            "color": [
+                                                "银色",
+                                                "深空灰"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "无线键盘（带有数字键盘）",
+                                            "name": "Apple键鼠外设",
+                                            "color": [
+                                                "银色",
+                                                "深空灰"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "Apple Pencil 手写笔MK0C2CH",
+                                            "name": "Apple键鼠外设",
+                                            "color": [
+                                                "唯一"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "brand": "Apple Beats",
+                    "type": [
+                        {
+                            "type": "Beats 耳机",
+                            "name": [
+                                {
+                                    "name": "Beats 头戴式耳机",
+                                    "ram": [
+                                        {
+                                            "ram": "Beats Solo3 Wireless",
+                                            "name": "Beats 头戴式耳机",
+                                            "color": [
+                                                "米奇90周年纪念款",
+                                                "桀骜黑红（十周年纪念款）",
+                                                "黑色",
+                                                "红色",
+                                                "炫黑色",
+                                                "玫瑰金色",
+                                                "炫白色",
+                                                "金色",
+                                                "丝缎银",
+                                                "银色",
+                                                "丝缎金",
+                                                "Pop 红",
+                                                "Pop 紫",
+                                                "Pop 水蓝",
+                                                "Pop 靛蓝",
+                                                "蓝色"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "Beats Studio3 Wireless",
+                                            "name": "Beats 头戴式耳机",
+                                            "color": [
+                                                "魅影灰（限量款）",
+                                                "桀骜黑红（十周年纪念款）",
+                                                "红色",
+                                                "午夜黑",
+                                                "水晶蓝",
+                                                "荒漠沙",
+                                                "哑光黑",
+                                                "灰色",
+                                                "白色"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "Beats Pro",
+                                            "name": "Beats 头戴式耳机",
+                                            "color": [
+                                                "黑色"
+                                            ]
+                                        },
+                                        {
+                                            "ram": "Beats EP",
+                                            "name": "Beats 头戴式耳机",
+                                            "color": [
+                                                "黑色",
+                                                "白色",
+                                                "红色",
+                                                "蓝色"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Beats 入耳式耳机",
+                                    "ram": [
+                                        {
+                                            "ram": "Beats Powerbeats3",
+                                            "name": "Beats 入耳式耳机",
+                                            "color": [
+                                                "桀骜黑红（十周年纪念款）",
+                                                "白色",
+                                                "黑色"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Beats 音响",
+                            "name": [
+                                {
+                                    "name": "Beats Pill+ 便携式蓝牙无线音箱",
+                                    "ram": [
+                                        {
+                                            "ram": "Beats Pill+ 便携式蓝牙无线音箱",
+                                            "name": "Beats Pill+ 便携式蓝牙无线音箱",
+                                            "color": [
+                                                "白色",
+                                                "黑色",
+                                                "橘红色"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        created: function () {
+        },
+
+        computed: {
+            typeArray: function () {
+                return this.brand !== null ? this.product[this.brand].type : null
+            },
+            nameArray: function () {
+                return (this.type !== null && this.typeArray.length) ? this.typeArray[this.type].name : null
+            },
+            ramArray: function () {
+                return (this.name !== null && this.nameArray.length) ? this.nameArray[this.name].ram : null
+            },
+            colorArray: function () {
+                return (this.ram !== null && this.ramArray.length) ? this.ramArray[this.ram].color : null
+            },
+            imeiShow: function () {
+                return this.brand === 0 && this.type === 0 ? true : false
+            },
+            check: function () {
+                this.error = null;
+                switch (true) {
+                    case this.brand === null:
+                        this.error = '品牌'
+                        break;
+                    case this.type === null:
+                        this.error = '产品类型'
+                        break;
+                    case this.name === null:
+                        this.error = '产品名称'
+                        break;
+                    case this.ram === null:
+                        this.error = '内存'
+                        break;
+                    case this.color === null:
+                        this.error = '颜色'
+                        break;
+                    case this.imeiShow && !this.imei:
+                        this.error = 'IMEI'
+                        break;
+                }
+                return this.error
+            }
+        },
+        methods: {
+            showImeiTip: function () {
+                this.imeiMaskShow = true
+            },
+            closeImeiTip: function () {
+                this.imeiMaskShow = false
+            },
+            cancleCamera: function () {
+                this.cameraShow = false;
+            },
+            useCamera: function () {
+                this.cameraShow = true
+            },
+            mergeObj: function (target, source) {
+                for (var obj in source) {
+                    target[obj] = source[obj];
+                }
+                return target;
+            },
+            submit: function (callback) {
+                if (this.check) {
+                    alert('请填写' + this.error + '信息')
+                    return false;
+                }
+                var data = {
+                    "brand": this.product[this.brand].brand,
+                    "type": this.typeArray[this.type].type,
+                    "name": this.nameArray[this.name].name,
+                    "memory": this.ramArray[this.ram].ram,
+                    "color": this.colorArray[this.color],
+                }
+
+                data = this.imei ? this.mergeObj(data, {'IMEI': this.imei}) : data;
+                var that = this
+
+                alert('所选商品信息为:' + JSON.stringify(data))
+                // if(that.submitFlag) {
+                //     that.submitFlag = false
+                //     $.ajax({
+                //         url: path + 'abc/info',
+                //         type: 'post',
+                //         contentType: 'application/json;charset=utf-8',
+                //         dataType: 'json',
+                //         data:  JSON.stringify({'extendInfo':JSON.stringify(data)}),
+                //         success: function (res) {
+                //             if(res.status === 'SUCCESS') {
+                //                 that.submitFlag = true;
+                //                 callback && callback();
+                //             } else {
+                //                 alert.showWindowFun('录入信息失败')
+                //             }
+
+                //         },
+                //         error: function (error) {
+                //             that.submitFlag = true
+                //             alert.showWindowFun('请求失败')
+                //         }
+                //     })
+                //     that.submitFlag = false
+                // }
+
+            }
+        }
+    })
+  </script>
+</body>
+
+</html>
