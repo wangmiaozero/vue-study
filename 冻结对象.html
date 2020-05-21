@@ -1,0 +1,44 @@
+<!--
+ * @Description: 
+ * @Version: 1.0
+ * @Autor: wangmiao
+ * @Date: 2020-05-21 09:39:11
+ * @LastEditors: wangmiao
+ * @LastEditTime: 2020-05-21 09:48:44
+--> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./vuev2.5.21.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{list}}
+    </div>
+    <script>
+      // Object.freeze() 它主要是可以将一个对象冻结，防止对象被修改，那这个对vue项目有什么优化作用呢，大家都知道vue采用了数据劫持的方式遍历数据对象，把这些属性转为getter、settter方法来监听并通知数据的变化，所以当你遇到一个巨大的数组或者对象，并且确定数据不会修改，这时就可以使用 Object.freeze() 方法来组织vue对这个巨大数据的转化，，这可以让性能得到很大的提升，举个例子：
+      new Vue({
+        el:"#app",
+        data:{
+           // vue不会对list里的object做getter、setter绑定
+           list:Object.freeze([{value:1},{value:2}])
+        },
+        mounted(){
+          // 界面不会有响应
+          this.list[0].value = 100;
+          // 下面两种做法,界面会有响应
+          this.list = [
+            {value:100},
+            {value:200}
+          ]
+          this.list = Object.freeze([{value:300},{value:400}])
+        },
+        methods:{},
+      })
+    </script>
+</body>
+</html>
