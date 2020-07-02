@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+    <style>
+        .boxli{
+            border: 1px dashed hotpink;
+            line-height: 35px;
+        }
+        .boxli:hover{
+            background-color: rebeccapurple;
+            transition: all .6s ease;
+        }
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+            transform: translateY(80px)
+        }
+        .v-enter-active,
+        .v-leave-active{
+            transition: all 1s ease;
+        }
+        .v-move{
+            transition: all 1s ease;
+        }
+        .v-leave-active{
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <label>
+            <input type="text" placeholder="请输入你的名字" v-model="name" @keyup.enter="add">
+        </label>
+        <transition-group tag="ul">
+            <li v-for="(item,i) in list" :key="item.id" @click.prevent="del(i)" class="boxli">
+                {{item.id}}
+                {{item.name}}
+            </li>
+        </transition-group>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                id:"",
+                name:"",
+                list:[
+                    {id:0,name:"hello horld"}
+                ]
+            },
+            methods:{
+                add(){
+                    this.list.push({id:++this.id,name:this.name})
+                    this.name=""
+                },del(i){
+                    this.list.splice(i,1)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

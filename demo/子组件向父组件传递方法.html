@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- <script src="./lib/vue-2.5.21.js"></script> -->
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+        <com2 @func="show"></com2>
+    </div>
+    <template id="tmpl">
+        <div>
+            <h1>我是子组件</h1>
+            <input type="button" value="我是子组件按钮" @click="myclick">
+        </div>
+    </template>
+    <script>
+        var com2 = {
+            template:"#tmpl",
+            data(){
+                return {
+                    sonmsg:{name:'儿子',age:6,sex:'男'}
+                }
+            },
+            methods:{
+                myclick(){
+                    this.$emit('func',this.sonmsg)
+                }
+            }
+        }
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                datamsg:null,
+            },
+            methods:{
+                show(res){
+                    //console.log(res)
+                    this.datamsg=res
+                }
+            },
+            components:{
+                com2
+            }
+        })
+    </script>
+</body>
+</html>

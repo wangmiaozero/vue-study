@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.5.21.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="button" :value="msg" @click="msg='No'">
+        <h3 id="h3">{{msg}}</h3>
+    </div>
+    <script>
+        var vm = new Vue({
+           el:"#app",
+           data:{
+               msg:"ok"
+            },
+            methods: {
+                show(){
+                    console.log('执行了show方法')
+                }
+            }, 
+            beforeCreate() {
+                //这是遇到第一个生命周期函数,表示实例对象完全被创建出来之前,
+               // console.log(this.msg)
+               // this.show()
+               //beforeCreate 生命周期函数执行的时候,data和methods还没有初始化
+            },
+            created(){
+               // console.log(this.msg)
+                //this.show()
+                //在created种,data和methods都已被初始化好了
+            },
+            beforeMount(){
+                //表示模板已经在内存中编辑完成了,但是尚未把模板渲染到页面中去,
+                //在boforeMount执行的时候,页面中的元素还没有真正替换过来
+                //console.log(document.getElementById('h3').innerText)
+            },
+            mounted(){
+                //内存中的模板已经挂载到页面中,用户可以看到了,
+                //mounted 这个阶段可以操作DOM,最好在这个阶段操作
+               // console.log(document.getElementById("h3").innerText)
+            },
+            beforeUpdate() {
+                console.log(this.msg)
+                console.log(document.getElementById('h3').innerText)
+                //这个阶段视图层数据还是旧的,data数据是新的.视图层未和data同步
+            },
+            updated() {
+                //updated 事件执行的时候.页面和data数据已经保持同步了,都是最新 
+                console.log(document.getElementById('h3').innerText)
+            },
+            beforeDestroy() {
+                //当实例进入销毁阶段时执行的钩子函数,
+                //此时Vue实例中的data/methods/filter/directives等都还可以使用
+            },
+            destroyed () {
+                //实例上所有成员完全销毁,无法使用了
+            }
+        })
+    </script>
+    
+</body>
+</html>

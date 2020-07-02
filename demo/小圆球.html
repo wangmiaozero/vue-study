@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.5.21.js"></script>
+    <style>
+        .box{
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: hotpink;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="button" @click="flag=!flag"> 
+        <transition
+        @before-enter="beforeEnter"
+        @enter="enter"
+        @after-enter="afertEnter">
+            <div class="box" v-show="flag"></div>
+        </transition>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                flag:false
+            },
+            methods: {
+                beforeEnter: (el) => {
+                    el.style.transform="translate(0,0)"
+                },
+                enter(el,done){
+                    el.offsetWidth//会强制刷新动画
+                    el.style.transform="translate(300px,300px)"
+                    el.style.transition="all 0.8s ease"
+                    done()
+                },
+                afertEnter(el){
+                    console.log(this.flag)
+                    this.flag = !this.flag
+                }
+            }
+        })
+    </script>
+</body>
+</html>
