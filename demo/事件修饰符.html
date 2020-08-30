@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+    <style>
+          #app{
+            border:1px solid red;
+            width: 500px;
+            height: 500px;
+        }
+        .box{
+            width: 250px;
+            height: 250px;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <!--stop可以组织事件冒泡-->
+    <!-- <div id="app">
+        <div class="box" @click="boxbtn">
+            <a href="#" @click.stop="btn">按钮</a>
+        </div>
+    </div> -->
+    <!--阻止默认行为-->
+    <!-- <div id="app">
+        <div class="box" @click="boxbtn">
+            <a href="http://www.baidu.com" @click.prevent="btn">按钮</a>
+        </div>
+    </div> -->
+    <!--once 只阻止一次-->
+    <div id="app">
+        <div class="box" @click="boxbtn">
+            <a href="http://www.baidu.com" @click.prevent.once="btn">只阻止一次</a>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                msg:"hello horld"
+            },
+            methods:{
+                btn(){
+                    console.log("按钮被点击了")
+                },
+                boxbtn(){
+                    console.log("我是被点击的BOX")
+                }
+            }
+        })
+    </script>
+</body>
+</html>

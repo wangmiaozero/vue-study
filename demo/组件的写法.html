@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.5.21.js"></script>
+</head>
+<body>
+    <div id="app">
+        <table>
+            <tbody>
+                <tr is="row"></tr>
+                <tr is="row"></tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        Vue.component('row',{
+            data(){
+                return {
+                    content:'组件实例'
+                }
+            },
+            template:'<tr><td>{{content}}</td></tr>'
+        })
+        new Vue({
+            el:"#app",
+            data: {},
+            methods:{}
+        })
+    </script>
+    
+</body>
+</html>

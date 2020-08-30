@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.5.21.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>ref的使用 一个组件使用$refs获得到是子组件的实例因应</h2>
+        <Myp @fasong="Myrequire" ref='one'></Myp>
+        <Myp @fasong="Myrequire" ref="two"></Myp>
+        <div>组件的总和: {{total}}</div>
+    </div>
+    <script>
+        Vue.component('Myp',{
+            data(){
+                return {
+                    num:0
+                }
+            },
+            template: "<div @click='add'>{{num}}</div>",
+            methods:{
+                add(){
+                    this.num++
+                    this.$emit("fasong")
+                }
+            }
+        })
+        new Vue({
+            el: "#app",
+            data: {
+                  total:0
+              },
+              methods:{
+                Myrequire(){
+                   this.total = this.$refs.one.num + this.$refs.two.num
+                }
+              }
+        })
+    </script>
+</body>
+</html>
