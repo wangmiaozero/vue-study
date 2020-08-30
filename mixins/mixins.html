@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>mixins</title>
+  <script src="../vuev2.5.21.js"></script>
+</head>
+<body>
+  <div id="app">
+    <p></p>
+  </div>
+  <script>
+      /* xixins对象 */
+    const mixinsTest = {
+        created() {
+            this.hello();
+        },
+        methods: {
+          hello(){
+              console.log('hollo 方法,组件方法')
+          }  
+        }, 
+    }
+    var vm = new Vue({
+      el:"#app",
+      mixins:[mixinsTest],
+      data:{
+        msg:"hello wrold"
+      },
+    //  mixins的created会先被调用,然后再执行组件的created
+      created(){
+        console.log('mimins.html页面')
+      }
+    })
+  
+  </script>
+</body>
+</html>
